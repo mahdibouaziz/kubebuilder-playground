@@ -7,4 +7,11 @@ layout:
 - go.kubebuilder.io/v4
 projectName: cnskunkworks-kb-operator
 repo: github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator
+resources:
+- controller: true
+  core: true
+  group: core
+  kind: Pod
+  path: k8s.io/api/core/v1
+  version: v1
 version: "3"
