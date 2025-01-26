@@ -5,6 +5,7 @@
 domain: core.cnskunkworks.io
 layout:
 - go.kubebuilder.io/v4
+multigroup: true
 projectName: cnskunkworks-kb-operator
 repo: github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator
 resources:
@@ -14,4 +15,13 @@ resources:
   kind: Pod
   path: k8s.io/api/core/v1
   version: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: core.cnskunkworks.io
+  group: api
+  kind: Configuration
+  path: github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator/api/api/v1alpha1
+  version: v1alpha1
 version: "3"

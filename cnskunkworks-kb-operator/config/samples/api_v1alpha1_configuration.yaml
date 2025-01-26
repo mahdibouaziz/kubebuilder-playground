@@ -1,0 +1,11 @@
+apiVersion: api.core.cnskunkworks.io/v1alpha1
+kind: Configuration
+metadata:
+  labels:
+    app.kubernetes.io/name: cnskunkworks-kb-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: configuration-sample
+spec:
+  # TODO(user): Add fields here
+  type: "foo"
+  setting: "default"

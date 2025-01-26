@@ -37,7 +37,9 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
+	apiv1alpha1 "github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator/api/api/v1alpha1"
 	"github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator/internal/controller"
+	apicontroller "github.com/mahdibouaziz/kubebuilder-playground/cnskunkworks-kb-operator/internal/controller/api"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -49,6 +51,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
+	utilruntime.Must(apiv1alpha1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -205,6 +208,13 @@ func main() {
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "Pod")
+		os.Exit(1)
+	}
+	if err = (&apicontroller.ConfigurationReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "Configuration")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder
