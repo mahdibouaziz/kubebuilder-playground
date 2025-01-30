@@ -99,6 +99,13 @@ func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 		return ctrl.Result{}, r.Create(ctx, deployment)
 	} else if err != nil {
 		return ctrl.Result{}, err
+	} else {
+		// Update the deployment
+		if deployment.Spec.Replicas != found.Spec.Replicas {
+			found.Spec.Replicas = deployment.Spec.Replicas
+			return ctrl.Result{}, r.Update(ctx, found)
+		}
+
 	}
 
 	return ctrl.Result{}, nil
