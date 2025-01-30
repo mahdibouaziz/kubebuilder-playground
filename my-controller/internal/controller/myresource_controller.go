@@ -54,7 +54,7 @@ type MyResourceReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.20.0/pkg/reconcile
 func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	l := log.FromContext(ctx)
-	l.Info("Reconciling MyResource:", req.NamespacedName)
+	l.Info("Reconciling MyResource:", "NamespacedName", req.NamespacedName)
 
 	// Fetch the MyResource instance
 	myResource := &myv1.MyResource{}
@@ -95,7 +95,7 @@ func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 	err = r.Get(ctx, types.NamespacedName{Name: deployment.Name, Namespace: deployment.Namespace}, found)
 	if err != nil && errors.IsNotFound(err) {
 		// Create the deployment
-		l.Info("Creating Deployment: ", deployment.Name)
+		l.Info("Creating Deployment: ", "Name", deployment.Name)
 		return ctrl.Result{}, r.Create(ctx, deployment)
 	} else if err != nil {
 		return ctrl.Result{}, err

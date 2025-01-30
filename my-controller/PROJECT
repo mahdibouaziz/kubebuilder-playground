@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: my-controller
 repo: github.com/mahdibouaziz/kubebuilder-playground/my-controller
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: example.com
+  group: apps
+  kind: MyResource
+  path: github.com/mahdibouaziz/kubebuilder-playground/my-controller/api/v1
+  version: v1
 version: "3"
